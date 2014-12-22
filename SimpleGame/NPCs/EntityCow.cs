@@ -1,10 +1,10 @@
-﻿using SimpleGame.Items;
+﻿using SimpleGameCliCore.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SimpleGame.NPCs
+namespace SimpleGameCliCore.NPCs
 {
     class EntityCow : LivingEntity
     {

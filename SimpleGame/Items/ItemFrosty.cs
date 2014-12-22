@@ -1,7 +1,7 @@
-﻿using SimpleGame.Items.BaseClasses;
+﻿using SimpleGameCliCore.Items.BaseClasses;
 using System;
 
-namespace SimpleGame.Items
+namespace SimpleGameCliCore.Items
 {
 	public class ItemFrosty : HealingItem
 	{

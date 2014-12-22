@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace SimpleGame.Items
+namespace SimpleGameCliCore.Items
 {
 	/// <summary>
 	/// Description of LivingEntity.

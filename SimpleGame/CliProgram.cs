@@ -1,9 +1,9 @@
-﻿using SimpleGame.Rooms;
+﻿using SimpleGameCliCore.Rooms;
 using System;
 
-namespace SimpleGame
+namespace SimpleGameCliCore
 {
-	class Program
+	public class CliProgram
 	{
 		static string dirSepChar = System.IO.Path.DirectorySeparatorChar.ToString();
 		public static string GamesSaveDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)

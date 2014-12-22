@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
-using SimpleGame.Items;
-using SimpleGame.Items.BaseClasses;
+using SimpleGameCliCore.Items;
+using SimpleGameCliCore.Items.BaseClasses;
 
-namespace SimpleGame
+namespace SimpleGameCliCore
 {
 	public class Player : LivingEntity
 	{

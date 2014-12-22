@@ -1,11 +1,11 @@
-﻿using SimpleGame.Items;
-using SimpleGame.Items.BaseClasses;
+﻿using SimpleGameCliCore.Items;
+using SimpleGameCliCore.Items.BaseClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SimpleGame.Rooms
+namespace SimpleGameCliCore.Rooms
 {
     class InventoryScreen : Room
     {

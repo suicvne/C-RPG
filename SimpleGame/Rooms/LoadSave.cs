@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SimpleGame.Rooms
+namespace SimpleGameCliCore.Rooms
 {
 	/// <summary>
 	/// Description of LoadSave.
@@ -34,7 +34,7 @@ namespace SimpleGame.Rooms
 
             saves.Clear();
 
-			foreach(var i in System.IO.Directory.GetDirectories(Program.GamesSaveDirectory))
+			foreach(var i in System.IO.Directory.GetDirectories(CliProgram.GamesSaveDirectory))
 			{
                 if(System.IO.File.Exists(i + System.IO.Path.DirectorySeparatorChar + "player.sav"))
                 {
@@ -72,12 +72,12 @@ namespace SimpleGame.Rooms
         {
             saves.Clear();
             int saveCount = 0;
-            foreach (var i in System.IO.Directory.GetDirectories(Program.GamesSaveDirectory))
+            foreach (var i in System.IO.Directory.GetDirectories(CliProgram.GamesSaveDirectory))
             {
                 //we look for .sav because that's the important thing. .inv is disposable and could be regenerated later if need be
                 if (System.IO.File.Exists(i + System.IO.Path.DirectorySeparatorChar + "player.sav"))
                 {
-                    Console.WriteLine("{0}: {1}\n", saveCount, System.IO.Path.GetFileNameWithoutExtension(i));
+                    //Console.WriteLine("{0}: {1}\n", saveCount, System.IO.Path.GetFileNameWithoutExtension(i));
                     saves.Add(i);
                     saveCount++;
                 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace SimpleGame
+namespace SimpleGameCliCore
 {
 	/// <summary>
 	/// Description of Room.

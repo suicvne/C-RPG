@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using SimpleGame.Items;
+using SimpleGameCliCore.Items;
 
-namespace SimpleGame
+namespace SimpleGameCliCore
 {
 	public class InventoryHandler
 	{

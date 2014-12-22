@@ -1,7 +1,7 @@
-﻿
-using System;
+﻿using System;
+using Microsoft.Xna.Framework.Graphics;
 
-namespace SimpleGame.Items
+namespace SimpleGameCliCore.Items
 {
 	/// <summary>
 	/// Description of Item.
@@ -13,6 +13,7 @@ namespace SimpleGame.Items
 		public string PluralName { get; set;}
         public string Description { get; set; }
         public ItemType ItemType { get; set; }
+        public Texture2D ItemSprite { get; set; }
 	}
     public enum ItemType
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SimpleGame
+namespace SimpleGameCliCore
 {
 	public class CharCreation : Room
 	{
@@ -99,8 +99,8 @@ namespace SimpleGame
 			res.PlayerHeight = _height;
 			res.PlayerWeight = _weight;
             //
-            System.IO.Directory.CreateDirectory(Program.GamesSaveDirectory + System.IO.Path.DirectorySeparatorChar + _name);
-            res.WriteToFile(Program.GamesSaveDirectory + System.IO.Path.DirectorySeparatorChar + _name + System.IO.Path.DirectorySeparatorChar + "player.sav");
+            System.IO.Directory.CreateDirectory(CliProgram.GamesSaveDirectory + System.IO.Path.DirectorySeparatorChar + _name);
+            res.WriteToFile(CliProgram.GamesSaveDirectory + System.IO.Path.DirectorySeparatorChar + _name + System.IO.Path.DirectorySeparatorChar + "player.sav");
             //
 			return res;
 		}

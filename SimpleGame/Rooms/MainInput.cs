@@ -1,8 +1,8 @@
 ﻿
-using SimpleGame.Rooms;
+using SimpleGameCliCore.Rooms;
 using System;
 
-namespace SimpleGame
+namespace SimpleGameCliCore
 {
 	/// <summary>
 	/// Description of MainInput.

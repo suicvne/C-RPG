@@ -1,10 +1,10 @@
-﻿using SimpleGame.Items.BaseClasses;
+﻿using SimpleGameCliCore.Items.BaseClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SimpleGame.Items
+namespace SimpleGameCliCore.Items
 {
     class WeaponWoodSword : Weapon
     {
