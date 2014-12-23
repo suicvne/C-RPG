@@ -14,9 +14,8 @@ namespace SimpleGameXNA
 
         static void Main(string[] args)
         {
-            GUIProgram guip = new GUIProgram();
-            guip.Run();
-
+            Game MainGame = new Game();
+            MainGame.Run();
         }
     }
 #endif
