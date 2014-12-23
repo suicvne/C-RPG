@@ -3,22 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ScreenSystemLibrary;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework;
+using EventInput;
 
 namespace SimpleGameXNA.Screens
 {
     public class InputScreen : GameScreen
     {
-        //
         SpriteFont sf;
         SpriteBatch sb;
         string USERINPUT = "";
+        string FINALCOMMAND = "";
 
         public override bool AcceptsInput
         {
@@ -28,11 +25,12 @@ namespace SimpleGameXNA.Screens
         public InputScreen()
         {
             TransitionOnTime = TimeSpan.FromSeconds(1);
-            TransitionOffTime = TimeSpan.FromSeconds(1);
-            EventInput.EventInput.CharEntered += new EventInput.CharEnteredHandler(EventInput_CharEntered);
+            TransitionOffTime = TimeSpan.FromSeconds(0.5);
+            EventInput.EventInput.CharEntered += new CharEnteredHandler(EventInput_CharEntered);
+            this.Removing += new EventHandler(TestScreen_Removing);
         }
 
-        void EventInput_CharEntered(object sender, EventInput.CharacterEventArgs e)
+        private void EventInput_CharEntered(object sender, CharacterEventArgs e)
         {
             if (e.Character == '\b')
             {
@@ -69,36 +67,41 @@ namespace SimpleGameXNA.Screens
             //base.Update(gameTime);
         }
 
+        protected override void DrawScreen(GameTime gameTime)
+        {
+            sb = new SpriteBatch(ScreenSystem.GraphicsDevice);
+            
+            sb.Begin();
+            int mid = ((int)ScreenSystem.GraphicsDevice.Viewport.Width - (int)sf.MeasureString("Testing").Length()) / 2;
+            sb.DrawString(sf, "INPUT", new Microsoft.Xna.Framework.Vector2(mid, 0), Color.White);
+            sb.DrawString(sf, USERINPUT + "|", new Microsoft.Xna.Framework.Vector2(0, 45), Color.White);
+            if(USERINPUT.Contains('\r')) //this means the user hit enter
+            {
+                string cmd = USERINPUT.Trim('\r').ToUpper();
+                if(cmd == "EXIT")
+                    Environment.Exit(0);
+                else if (cmd == "INVENTORY")
+                {
+                    FINALCOMMAND = cmd;
+                    ExitScreen();
+                }
+            }
+            sb.End();
+        }
+
         public override void LoadContent()
         {
             ContentManager content = ScreenSystem.Content;
             sf = content.Load<SpriteFont>("MainFont");
         }
 
-        public override void UnloadContent()
+        private void TestScreen_Removing(object sender, EventArgs e)
         {
-            sf = null;
+            if (FINALCOMMAND == "INVENTORY")
+            {
+                ScreenSystem.AddScreen(new InventoryScreen());
+            }
         }
 
-        protected override void DrawScreen(GameTime gameTime)
-        {
-            ScreenSystem.GraphicsDevice.Clear(Color.DarkRed);
-            sb = new SpriteBatch(ScreenSystem.GraphicsDevice);
-            sb.Begin();
-            int mid = ((int)ScreenSystem.GraphicsDevice.Viewport.Width - (int)sf.MeasureString("INVENTORY").Length()) / 2;
-            sb.DrawString(sf, "INVENTORY", new Vector2(mid, 0), Color.White);
-            sb.DrawString(sf, USERINPUT + "|", new Vector2(0, 45), Color.White);
-            if (USERINPUT.Contains('\r'))
-            {
-                string cmd = USERINPUT.Trim('\r').ToUpper();
-                if (cmd == "Q")
-                { 
-                    this.ExitScreen();
-                    ScreenSystem.AddScreen(new InventoryScreen());
-                }
-            }
-            sb.End();
-        }
-        //
     }
 }

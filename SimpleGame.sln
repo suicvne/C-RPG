@@ -5,9 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleGameCliCore", "Simple
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleGameXNA", "SimpleGameXNA\SimpleGameXNA\SimpleGameXNA.csproj", "{23931428-C2AB-4A90-BCFB-31379659468E}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "SimpleGameXNAContent", "SimpleGameXNA\SimpleGameXNAContent\SimpleGameXNAContent.contentproj", "{03889C0B-5F12-4BAD-A714-56E0989FBE72}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameStateManagement (Windows)", "GameStateManagement\GameStateManagement (Windows).csproj", "{0A551D79-F37E-4529-9CA0-3FD2E9EA715E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleGameXNAContent", "SimpleGameXNA\SimpleGameXNAContent\SimpleGameXNAContent.contentproj", "{03889C0B-5F12-4BAD-A714-56E0989FBE72}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,16 +43,6 @@ Global
 		{03889C0B-5F12-4BAD-A714-56E0989FBE72}.Release|Any CPU.ActiveCfg = Release|x86
 		{03889C0B-5F12-4BAD-A714-56E0989FBE72}.Release|Mixed Platforms.ActiveCfg = Release|x86
 		{03889C0B-5F12-4BAD-A714-56E0989FBE72}.Release|x86.ActiveCfg = Release|x86
-		{0A551D79-F37E-4529-9CA0-3FD2E9EA715E}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{0A551D79-F37E-4529-9CA0-3FD2E9EA715E}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{0A551D79-F37E-4529-9CA0-3FD2E9EA715E}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{0A551D79-F37E-4529-9CA0-3FD2E9EA715E}.Debug|x86.ActiveCfg = Debug|x86
-		{0A551D79-F37E-4529-9CA0-3FD2E9EA715E}.Debug|x86.Build.0 = Debug|x86
-		{0A551D79-F37E-4529-9CA0-3FD2E9EA715E}.Release|Any CPU.ActiveCfg = Release|x86
-		{0A551D79-F37E-4529-9CA0-3FD2E9EA715E}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{0A551D79-F37E-4529-9CA0-3FD2E9EA715E}.Release|Mixed Platforms.Build.0 = Release|x86
-		{0A551D79-F37E-4529-9CA0-3FD2E9EA715E}.Release|x86.ActiveCfg = Release|x86
-		{0A551D79-F37E-4529-9CA0-3FD2E9EA715E}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

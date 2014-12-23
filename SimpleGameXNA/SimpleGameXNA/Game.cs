@@ -40,7 +40,7 @@ namespace SimpleGameXNA
 
         protected override void Initialize()
         {
-            screenSystem.AddScreen(new InventoryScreen());
+            screenSystem.AddScreen(new LoadSaveScreen());
             base.Initialize();
         }
 

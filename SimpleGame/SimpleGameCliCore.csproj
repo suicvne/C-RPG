@@ -68,7 +68,6 @@
     <Compile Include="Core\ExampleGame.cs" />
     <Compile Include="Items\BaseClasses\HealingItem.cs" />
     <Compile Include="Items\BaseClasses\Item.cs" />
-    <Compile Include="Items\BaseClasses\Texture2D.cs" />
     <Compile Include="Items\BaseClasses\Weapon.cs" />
     <Compile Include="Items\ItemCowMeat.cs" />
     <Compile Include="Items\ItemFrosty.cs" />
