@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using EventInput;
+using System.IO;
 
 namespace SimpleGameXNA.Screens
 {
@@ -28,6 +29,9 @@ namespace SimpleGameXNA.Screens
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
             EventInput.EventInput.CharEntered += new CharEnteredHandler(EventInput_CharEntered);
             this.Removing += new EventHandler(TestScreen_Removing);
+            try
+            { ScreenSystem.GraphicsDevice.Reset(); }
+            catch { }
         }
 
         private void EventInput_CharEntered(object sender, CharacterEventArgs e)
@@ -59,7 +63,13 @@ namespace SimpleGameXNA.Screens
 
         public override void Initialize()
         {
-            
+            try
+            {
+                ScreenSystem.RemoveScreen(new InputScreen());
+                ScreenSystem.RemoveScreen(new LoadSaveScreen());
+            }
+            catch
+            { }
         }
 
         protected override void UpdateScreen(GameTime gameTime)
@@ -78,8 +88,21 @@ namespace SimpleGameXNA.Screens
             if(USERINPUT.Contains('\r')) //this means the user hit enter
             {
                 string cmd = USERINPUT.Trim('\r').ToUpper();
-                if(cmd == "EXIT")
+                if (cmd == "EXIT")
+                {
+                    sb.DrawString(sf, "Saving character..", new Vector2(0, 60), Color.Red);
+                    Program.MAINPLAYER.WriteToFile(Program.GamesSaveDirectory
+                        + Path.DirectorySeparatorChar
+                        + Program.MAINPLAYER.Name
+                        + Path.DirectorySeparatorChar
+                        + "player.sav");
+                    Program.MAINPLAYERINVENTORY.WriteToFile(Program.GamesSaveDirectory
+                        + Path.DirectorySeparatorChar
+                        + Program.MAINPLAYER.Name
+                        + Path.DirectorySeparatorChar
+                        + "player.inv");
                     Environment.Exit(0);
+                }
                 else if (cmd == "INVENTORY")
                 {
                     FINALCOMMAND = cmd;
@@ -100,6 +123,8 @@ namespace SimpleGameXNA.Screens
             if (FINALCOMMAND == "INVENTORY")
             {
                 ScreenSystem.AddScreen(new InventoryScreen());
+                this.UnloadContent();
+                this.State = ScreenState.Inactive;
             }
         }
 

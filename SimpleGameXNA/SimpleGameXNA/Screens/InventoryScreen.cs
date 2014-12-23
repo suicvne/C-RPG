@@ -43,6 +43,8 @@ namespace SimpleGameXNA.Screens
                 ScreenSystem.AddScreen(new InventoryScreen());
             else
                 ScreenSystem.AddScreen(new InputScreen());
+
+            
         }
 
         void EventInput_CharEntered(object sender, EventInput.CharacterEventArgs e)
@@ -168,7 +170,6 @@ namespace SimpleGameXNA.Screens
                 if (cmd == "Q")
                 { 
                     this.ExitScreen();
-                    ScreenSystem.AddScreen(new InputScreen());
                 }
                 if (cmd == "I")
                 {
@@ -183,6 +184,7 @@ namespace SimpleGameXNA.Screens
                         int indx = int.Parse(indxString);
                         GetDebugItem(indx);
                     }
+                    this.ExitScreen();
 #endif
                 }
             }
