@@ -13,7 +13,7 @@
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <XnaFrameworkVersion>v4.0</XnaFrameworkVersion>
     <XnaPlatform>Windows</XnaPlatform>
-    <XnaProfile>HiDef</XnaProfile>
+    <XnaProfile>Reach</XnaProfile>
     <XnaCrossPlatformGroupID>39cb64d5-497f-41bc-943d-128c18b07d04</XnaCrossPlatformGroupID>
     <XnaOutputType>Game</XnaOutputType>
     <ApplicationIcon>Game.ico</ApplicationIcon>
@@ -92,7 +92,8 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="ScreenSystem">
-      <HintPath>..\..\..\..\..\Desktop\ScreenSystemImplementation\ScreenSystemImplementation\ScreenSystemImplementation\ScreenSystem.dll</HintPath>
+      <HintPath>..\..\ScreenSystem.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System">
       <Private>False</Private>
