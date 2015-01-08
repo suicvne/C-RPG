@@ -9,7 +9,7 @@ namespace SimpleGameCliCore
 		public static string GamesSaveDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
 			+ dirSepChar + "My Games" + dirSepChar + "C#RPG";
         //
-        static InventoryHandler MAINPLAYERINVENTORY = new InventoryHandler(20);
+        public static InventoryHandler MAINPLAYERINVENTORY = new InventoryHandler(20);
         static Player mainPlayer = new Player();
         // You can obtain the player's directory post loading a save simply by referencing the following
         // GamesSaveDirectory + dirSepChar + mainPlayer.Name + dirSepChar + "player.sav"
@@ -33,8 +33,8 @@ namespace SimpleGameCliCore
                 }
                 else
                 {
-                    mainPlayer.ReadFromFile(loadedChar + dirSepChar + "player.sav");
                     MAINPLAYERINVENTORY.ReadFromFile(loadedChar + dirSepChar + "player.inv");
+                    mainPlayer.ReadFromFile(loadedChar + dirSepChar + "player.sav");
                 }
             }
             else
@@ -88,6 +88,9 @@ namespace SimpleGameCliCore
                     break;
                 case("STATUS"):
                     PlayerStatusScreen.DrawStatusScreen(mainPlayer, MAINPLAYERINVENTORY);
+                    break;
+                case("FORGE"):
+                    WeaponForgery.DrawForgeryScreen(mainPlayer, MAINPLAYERINVENTORY);
                     break;
                 case ("QUIT"):
                     ExitEvents();

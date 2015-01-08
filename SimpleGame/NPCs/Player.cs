@@ -40,7 +40,7 @@ namespace SimpleGameCliCore
                 sw.WriteLine(PlayerGender);
                 sw.WriteLine(MaximumHitpoints);
                 sw.WriteLine(CurrentHitpoints);
-                sw.WriteLine(EquippedWeapon.ID);
+                sw.WriteLine(EquippedWeapon.InventoryIndex);
                 sw.WriteLine((int)CurrentPlayerStatus);
                 sw.Flush();
                 sw.Close();
@@ -142,15 +142,16 @@ namespace SimpleGameCliCore
                             try
                             {
                                 int ID = int.Parse(line);
-                                Item retrieved = ItemMapping.GetItemByID(ID);
-                                Weapon weapon;
-                                if(retrieved.ItemType == ItemType.Weapon)
-                                {
-                                    weapon = (Weapon)retrieved;
-                                    EquippedWeapon = weapon;
-                                }
-                                else
-                                    EquippedWeapon = new WeaponNull();
+                                EquippedWeapon = (Weapon)CliProgram.MAINPLAYERINVENTORY.RetrieveItem(ID);
+                                //tem retrieved = ItemMapping.GetItemByID(ID);
+                                //Weapon weapon;
+                                //if(retrieved.ItemType == ItemType.Weapon)
+                                //{
+                                //    weapon = (Weapon)retrieved;
+                                //    EquippedWeapon = weapon;
+                                //}
+                                //else
+                                //    EquippedWeapon = new WeaponNull();
                             }
                             catch
                             {

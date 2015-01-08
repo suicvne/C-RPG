@@ -32,7 +32,10 @@ namespace SimpleGameCliCore.Rooms
             Console.WriteLine("Hitpoints: {0} / {1}", pl.CurrentHitpoints, pl.MaximumHitpoints);
             Console.WriteLine("Height: {0}", pl.PlayerHeight);
             Console.WriteLine("Weight: {0}", pl.PlayerWeight);
-            Console.WriteLine("Equipped Item: {0}", pl.EquippedWeapon.Name);
+            if (pl.EquippedWeapon.CustomItemName != null)
+                Console.WriteLine("Equipped Weapon: {0} ({1})", pl.EquippedWeapon.CustomItemName, pl.EquippedWeapon.Name);
+            else
+                Console.WriteLine("Equipped Item: {0}", pl.EquippedWeapon.Name);
             //
             Console.WriteLine("\n\nEnter e to equip an item or q to quit: ");
             string input = Console.ReadLine().ToUpper();

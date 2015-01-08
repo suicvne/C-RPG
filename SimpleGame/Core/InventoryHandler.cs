@@ -85,6 +85,7 @@ namespace SimpleGameCliCore
             using(var sr = new System.IO.StreamReader(file))
             {
                 string line;
+                int lineCountIndex = 0;
                 while ((line = sr.ReadLine()) != null)
                 {
                     if (line.Contains(","))
@@ -96,11 +97,14 @@ namespace SimpleGameCliCore
                             int id2 = int.Parse(split[0]);
                             Item add2 = ItemMapping.GetItemByID(id2);
                             add2.CustomItemName = customItemName;
+                            add2.InventoryIndex = lineCountIndex;
                             if (_inventory.Count <= MAXCAPACITY)
                                 _inventory.Add(add2);
                         }
                         catch
                         {
+                            Item nullItem = new ItemNull();
+                            nullItem.InventoryIndex = lineCountIndex;
                             _inventory.Add(new ItemNull());
                         }
                     }
@@ -110,14 +114,18 @@ namespace SimpleGameCliCore
                         {
                             int id = int.Parse(line);
                             Item add = ItemMapping.GetItemByID(id);
+                            add.InventoryIndex = lineCountIndex;
                             if (_inventory.Count <= MAXCAPACITY)
                                 _inventory.Add(add);
                         }
                         catch
                         {
+                            Item nullItem = new ItemNull();
+                            nullItem.InventoryIndex = lineCountIndex;
                             _inventory.Add(new ItemNull());
                         }
                     }
+                    lineCountIndex++;
                 }
             }
         }

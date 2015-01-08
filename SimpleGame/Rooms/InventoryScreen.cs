@@ -218,7 +218,7 @@ namespace SimpleGameCliCore.Rooms
         //
         public static Item SelectWeapon(InventoryHandler iv)
         {
-            bool allowSelection = false;
+            bool allowSelection = true;
             Console.Clear();
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
@@ -239,8 +239,14 @@ namespace SimpleGameCliCore.Rooms
             {
                 for (int i = 0; i < iv.GetCount(); i++)
                 {
+                    Item retrievedItem = iv.RetrieveItem(i);
                     if (iv.RetrieveItem(i).ItemType == ItemType.Weapon)
-                    { Console.WriteLine("{0}. {1}", i, iv.RetrieveItem(i).Name); weaponCount++; }
+                    { 
+                        if(retrievedItem.CustomItemName != null)
+                            Console.WriteLine("{0}. {1} ({2})", i, retrievedItem.CustomItemName, retrievedItem.Name);
+                        else
+                            Console.WriteLine("{0}. {1}", i, iv.RetrieveItem(i).Name); weaponCount++; 
+                    }
                 }
             }
             else
