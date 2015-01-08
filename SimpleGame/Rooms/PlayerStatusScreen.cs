@@ -27,6 +27,7 @@ namespace SimpleGameCliCore.Rooms
             Console.WriteLine("\n\n");
             Console.WriteLine("Player Status\n");
             Console.WriteLine("Name: {0}", pl.Name);
+            Console.WriteLine("Status: {0}", pl.CurrentPlayerStatus.ToString());
             Console.WriteLine("Gender: {0}", pl.PlayerGender.ToString());
             Console.WriteLine("Hitpoints: {0} / {1}", pl.CurrentHitpoints, pl.MaximumHitpoints);
             Console.WriteLine("Height: {0}", pl.PlayerHeight);

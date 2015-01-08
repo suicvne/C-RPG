@@ -5,13 +5,19 @@ using SimpleGameCliCore.Items.BaseClasses;
 
 namespace SimpleGameCliCore
 {
+    public enum PlayerStatus
+    {
+        OK, Dead
+    }
+
 	public class Player : LivingEntity
 	{
 		public double PlayerHeight {get; set;}
 		public double PlayerWeight {get; set;}
 		public Gender PlayerGender {get; set;}
         public Weapon EquippedWeapon { get; set; }
-		
+        public PlayerStatus CurrentPlayerStatus { get; set; }
+
 		public Player()
 		{
 			ID = 0;
@@ -19,6 +25,7 @@ namespace SimpleGameCliCore
 			CurrentHitpoints = 10;
 			MaximumHitpoints = 10;
             EquippedWeapon = new WeaponNull();
+            CurrentPlayerStatus = PlayerStatus.OK;
 		}
 		
 		//we have to write the player's information and 
@@ -34,6 +41,7 @@ namespace SimpleGameCliCore
                 sw.WriteLine(MaximumHitpoints);
                 sw.WriteLine(CurrentHitpoints);
                 sw.WriteLine(EquippedWeapon.ID);
+                sw.WriteLine((int)CurrentPlayerStatus);
                 sw.Flush();
                 sw.Close();
 			}
@@ -49,6 +57,8 @@ namespace SimpleGameCliCore
                 ///3: gender
                 ///4: maxhp
                 ///5: curhp
+                ///6: EquippedWeapon ID
+                ///7: CurrentPlayerStatus as int
                 string line;
                 int lineCount = 0;
                 while((line = sr.ReadLine()) != null)
@@ -146,6 +156,20 @@ namespace SimpleGameCliCore
                             {
                                 Room err = new Room(RoomType.ErrorMessage,
                                     "An error occurred while reading your save file for EquippedWeapon",
+                                    "Error in ReadFromFile trying to parse '" + line + "'",
+                                    "Stop messing around with your saves!");
+                            }
+                            break;
+                        case(7):
+                            try
+                            {
+                                int status = int.Parse(line);
+                                CurrentPlayerStatus = (PlayerStatus)status;
+                            }
+                            catch
+                            {
+                                Room err = new Room(RoomType.ErrorMessage,
+                                    "An error occurred while reading your save file for CurrentPlayerStatus",
                                     "Error in ReadFromFile trying to parse '" + line + "'",
                                     "Stop messing around with your saves!");
                             }
