@@ -69,7 +69,10 @@ namespace SimpleGameCliCore
             {
                 foreach(var item in _inventory)
                 {
-                    sw.WriteLine(item.ID.ToString());
+                    if(item.CustomItemName != null)
+                        sw.WriteLine("{0},\"{1}\"", item.ID.ToString(), item.CustomItemName);
+                    else
+                        sw.WriteLine(item.ID.ToString());
                 }
                 sw.Flush();
                 sw.Close();
@@ -84,16 +87,36 @@ namespace SimpleGameCliCore
                 string line;
                 while ((line = sr.ReadLine()) != null)
                 {
-                    try
+                    if (line.Contains(","))
                     {
-                        int id = int.Parse(line);
-                        Item add = ItemMapping.GetItemByID(id);
-                        if(_inventory.Count <= MAXCAPACITY)
-                            _inventory.Add(add);
+                        var split = line.Split(new char[] {','}, 2);
+                        string customItemName = split[1].Trim(new char[]{'\"'});
+                        try
+                        {
+                            int id2 = int.Parse(split[0]);
+                            Item add2 = ItemMapping.GetItemByID(id2);
+                            add2.CustomItemName = customItemName;
+                            if (_inventory.Count <= MAXCAPACITY)
+                                _inventory.Add(add2);
+                        }
+                        catch
+                        {
+                            _inventory.Add(new ItemNull());
+                        }
                     }
-                    catch
+                    else
                     {
-                        _inventory.Add(new ItemNull());
+                        try
+                        {
+                            int id = int.Parse(line);
+                            Item add = ItemMapping.GetItemByID(id);
+                            if (_inventory.Count <= MAXCAPACITY)
+                                _inventory.Add(add);
+                        }
+                        catch
+                        {
+                            _inventory.Add(new ItemNull());
+                        }
                     }
                 }
             }

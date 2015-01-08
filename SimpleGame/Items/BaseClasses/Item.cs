@@ -14,6 +14,7 @@ namespace SimpleGameCliCore.Items
         public string Description { get; set; }
         public ItemType ItemType { get; set; }
         public Texture2D ItemSprite { get; set; }
+        public string CustomItemName { get; set; }
 	}
     public enum ItemType
     {

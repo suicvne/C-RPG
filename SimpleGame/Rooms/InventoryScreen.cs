@@ -32,7 +32,11 @@ namespace SimpleGameCliCore.Rooms
 
                 for (int i = 0; i < iv.GetCount(); i++)
                 {
-                    Console.WriteLine("{0}. {1}", i, iv.RetrieveItem(i).Name);
+                    Item retr = iv.RetrieveItem(i);
+                    if (retr.CustomItemName != null)
+                        Console.WriteLine("{0}. {1} ({2})", i, retr.CustomItemName, retr.Name);
+                    else
+                        Console.WriteLine("{0}. {1}", i, iv.RetrieveItem(i).Name);
                 }
             }
             else
@@ -131,12 +135,20 @@ namespace SimpleGameCliCore.Rooms
             switch(retrieveItem.ItemType)
             {
                 case(ItemType.BasicItem):
-                    mainInfoScreen = string.Format("Item Name: {0}\nItem Plural Name: {1}\nDescription: {2}\n\n", 
+                    if (retrieveItem.CustomItemName != null)
+                        mainInfoScreen = string.Format("Item Name: {0} ({1})\nItem Plural Name: {2}\nDescription: {3}",
+                            retrieveItem.CustomItemName, retrieveItem.Name, retrieveItem.PluralName, retrieveItem.Description);
+                    else
+                        mainInfoScreen = string.Format("Item Name: {0}\nItem Plural Name: {1}\nDescription: {2}\n\n",
                 retrieveItem.Name, retrieveItem.PluralName, retrieveItem.Description);
                     break;
                 case(ItemType.Weapon):
                     Weapon retrievedWeapon = (Weapon)retrieveItem;
-                    mainInfoScreen = string.Format("Item Name: {0}\nItem Plural Name: {1}\nDescription: {2}\nDamage: {3}\nWeapon Type: {4}",
+                    if (retrievedWeapon.CustomItemName != null)
+                        mainInfoScreen = string.Format("Item Name: {0} ({1})\nItem Plural Name: {2}\nDescription: {3}\nDamage: {4}\nWeapon Type: {5}",
+                            retrievedWeapon.CustomItemName, retrievedWeapon.Name, retrievedWeapon.PluralName, retrievedWeapon.Description, retrievedWeapon.Damage, retrievedWeapon.Type);
+                    else
+                        mainInfoScreen = string.Format("Item Name: {0}\nItem Plural Name: {1}\nDescription: {2}\nDamage: {3}\nWeapon Type: {4}",
                         retrievedWeapon.Name, retrievedWeapon.PluralName, retrievedWeapon.Description, retrievedWeapon.Damage, retrievedWeapon.Type);
                     break;
                 case(ItemType.Healing):
