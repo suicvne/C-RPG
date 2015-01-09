@@ -1,0 +1,11 @@
+#INV2#
+##OH And we should also be able to comment lines with double pound
+##Slot:ItemID
+##or
+##Slot:ItemID,"CustomName"
+0:2
+1:1
+2:2,"Excalibur"
+#CHEST0#
+0:1
+1:1
