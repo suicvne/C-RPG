@@ -148,7 +148,7 @@ namespace SimpleGameCliCore
                                 if (ID == -2)
                                     EquippedWeapon = new WeaponNull();
                                 else
-                                    EquippedWeapon = (Weapon)CliProgram.MAINPLAYERINVENTORY.RetrieveItem(ID);
+                                    EquippedWeapon = (Weapon)CliProgram.MainPlayerInventory.RetrieveItem(ID);
                             }
                             catch
                             {

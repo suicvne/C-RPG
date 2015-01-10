@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace SimpleGameCliCore.Rooms
 {
@@ -26,6 +27,7 @@ BEGINNINGOFLOOP:
             for(int i = 0; i < forgeWelcomeMessage.Length; i++)
             {
                 Console.Write(forgeWelcomeMessage[i]);
+                Thread.Sleep(70);
             }
             Console.Write("\nType name to rename a weapon, or q to quit: ");
             string input = Console.ReadLine().ToUpper();

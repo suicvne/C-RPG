@@ -1,4 +1,5 @@
-﻿using SimpleGameCliCore.Rooms;
+﻿using SimpleGameCliCore.Core;
+using SimpleGameCliCore.Rooms;
 using System;
 
 namespace SimpleGameCliCore
@@ -9,8 +10,9 @@ namespace SimpleGameCliCore
 		public static string GamesSaveDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
 			+ dirSepChar + "My Games" + dirSepChar + "C#RPG";
         //
-        public static InventoryHandler MAINPLAYERINVENTORY = new InventoryHandler(20);
-        static Player mainPlayer = new Player();
+        public static InventoryHandler MainPlayerInventory = new InventoryHandler(20);
+        public static Player MainPlayer = new Player();
+        public static ChestHandler MainChestHandler = new ChestHandler();
         // You can obtain the player's directory post loading a save simply by referencing the following
         // GamesSaveDirectory + dirSepChar + mainPlayer.Name + dirSepChar + "player.sav"
         // Inventory works the same way, except change "player.sav" to "player.inv"
@@ -28,13 +30,23 @@ namespace SimpleGameCliCore
                 {
                     Player createdChar = CharCreation.CreateCharacter();
                     createdChar.WriteToFile(GamesSaveDirectory + dirSepChar + createdChar.Name + dirSepChar + "player.sav");
-                    MAINPLAYERINVENTORY.WriteToFile(GamesSaveDirectory + dirSepChar + createdChar.Name + dirSepChar + "player.inv");
+                    MainPlayerInventory.WriteToFile_NEWPROTOTYPE(GamesSaveDirectory + dirSepChar + createdChar.Name + dirSepChar + "player.inv");
                     goto VERYBEGINNING;
                 }
                 else
                 {
-                    MAINPLAYERINVENTORY.ReadFromFile(loadedChar + dirSepChar + "player.inv");
-                    mainPlayer.ReadFromFile(loadedChar + dirSepChar + "player.sav");
+                    if(!MainPlayerInventory.IsValidFile(loadedChar + dirSepChar + "player.inv")) //evaluates to false if the file is damaged or is old, so we try migrating
+                    {
+                        //begin migration
+                        Console.WriteLine("Beginning save migration");
+                        Console.ReadLine();
+                        MainPlayerInventory.ReadFromFile(loadedChar + dirSepChar + "player.inv");
+                        System.IO.File.Move(loadedChar + dirSepChar + "player.inv", loadedChar + dirSepChar + "player.inv_old");
+                        MainPlayerInventory.WriteToFile_NEWPROTOTYPE(loadedChar + dirSepChar + "player.inv");
+                    }
+                    MainPlayerInventory.ReadFromFile_NEWPROTOTYPE(loadedChar + dirSepChar + "player.inv");
+                    MainPlayer.ReadFromFile(loadedChar + dirSepChar + "player.sav");
+                    MainChestHandler.TryLoadingAllChests();
                 }
             }
             else
@@ -46,7 +58,7 @@ namespace SimpleGameCliCore
                 {
                     Player createdChar = CharCreation.CreateCharacter();
                     createdChar.WriteToFile(GamesSaveDirectory + dirSepChar + createdChar.Name + dirSepChar + "player.sav");
-                    MAINPLAYERINVENTORY.WriteToFile(GamesSaveDirectory + dirSepChar + createdChar.Name + dirSepChar + "player.inv");
+                    MainPlayerInventory.WriteToFile_NEWPROTOTYPE(GamesSaveDirectory + dirSepChar + createdChar.Name + dirSepChar + "player.inv");
                     goto VERYBEGINNING;
                 }
                 else
@@ -84,13 +96,13 @@ namespace SimpleGameCliCore
             switch (input)
             {
                 case ("INVENTORY"):
-                    InventoryScreen.DrawInventoryScreen(mainPlayer, MAINPLAYERINVENTORY);
+                    InventoryScreen.DrawInventoryScreen(MainPlayer, MainPlayerInventory);
                     break;
                 case("STATUS"):
-                    PlayerStatusScreen.DrawStatusScreen(mainPlayer, MAINPLAYERINVENTORY);
+                    PlayerStatusScreen.DrawStatusScreen(MainPlayer, MainPlayerInventory);
                     break;
                 case("FORGE"):
-                    WeaponForgery.DrawForgeryScreen(mainPlayer, MAINPLAYERINVENTORY);
+                    WeaponForgery.DrawForgeryScreen(MainPlayer, MainPlayerInventory);
                     break;
                 case ("QUIT"):
                     ExitEvents();
@@ -110,8 +122,8 @@ namespace SimpleGameCliCore
         static void ExitEvents()
         {
             //Save everything
-            mainPlayer.WriteToFile(GamesSaveDirectory + dirSepChar + mainPlayer.Name + dirSepChar + "player.sav");
-            MAINPLAYERINVENTORY.WriteToFile(GamesSaveDirectory + dirSepChar + mainPlayer.Name + dirSepChar + "player.inv");
+            MainPlayer.WriteToFile(GamesSaveDirectory + dirSepChar + MainPlayer.Name + dirSepChar + "player.sav");
+            MainPlayerInventory.WriteToFile_NEWPROTOTYPE(GamesSaveDirectory + dirSepChar + MainPlayer.Name + dirSepChar + "player.inv");
         }
 
 		static void FirstRunEvents()

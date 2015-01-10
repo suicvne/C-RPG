@@ -1,8 +1,10 @@
+#64#
+//64 indicates the verison numbering/new file format
 #INV2#
-##OH And we should also be able to comment lines with double pound
-##Slot:ItemID
-##or
-##Slot:ItemID,"CustomName"
+//OH And we should also be able to comment lines with double pound
+//Slot:ItemID
+//or
+//Slot:ItemID,"CustomName"
 0:2
 1:1
 2:2,"Excalibur"
