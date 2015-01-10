@@ -51,6 +51,7 @@ namespace SimpleGameCliCore.Core
                                     Item toAdd = ItemMapping.GetItemByID(itemID);
                                     toAdd.InventoryIndex = index;
                                     toAdd.CustomItemName = customItemName;
+                                    _chestContents.Add(toAdd);
                                 }
                                 else
                                 {
@@ -59,6 +60,7 @@ namespace SimpleGameCliCore.Core
                                     int itemID = int.Parse(split[1]);
                                     Item toAdd = ItemMapping.GetItemByID(itemID);
                                     toAdd.InventoryIndex = index;
+                                    _chestContents.Add(toAdd);
                                 }
                             }
                         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using SimpleGameCliCore.Items;
+using SimpleGameCliCore.Core;
 
 namespace SimpleGameCliCore
 {
@@ -201,21 +202,24 @@ namespace SimpleGameCliCore
                     bool wroteChestBeginning = false;
                     for(int i = 0; i < CliProgram.MainChestHandler.ChestsList().Count; i++)
                     {
-                        if(!wroteChestBeginning)
+                        Chest c = CliProgram.MainChestHandler.ChestsList()[i];
+
+                        for (int xx = 0; xx < c.ChestContents().Count; xx++ )
                         {
-                            sw.WriteLine("#CHEST{0}#", chestNumber);
-                            wroteChestBeginning = true;
-                        }
-                        for(int x = 0; i < CliProgram.MainChestHandler.ChestsList()[i].ChestContents().Count; x++)
-                        {
-                            Item retrieve = CliProgram.MainChestHandler.ChestsList()[i].ChestContents()[x];
-                            if(retrieve.CustomItemName != null)
+                            if (!wroteChestBeginning)
                             {
-                                sw.WriteLine("{0}:{1},\"{2}\"", x, retrieve.ID, retrieve.CustomItemName);
+                                sw.WriteLine("#CHEST{0}#", chestNumber);
+                                wroteChestBeginning = true;
+                            }
+                            //
+                            Item retrieve = c.ChestContents()[xx];
+                            if (retrieve.CustomItemName != null)
+                            {
+                                sw.WriteLine("{0}:{1},\"{2}\"", xx, retrieve.ID, retrieve.CustomItemName);
                             }
                             else
                             {
-                                sw.WriteLine("{0}:{1}", x, retrieve.ID);
+                                sw.WriteLine("{0}:{1}", xx, retrieve.ID);
                             }
                         }
                         wroteChestBeginning = false;
