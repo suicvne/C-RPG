@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual C# Express 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleGameCliCore", "SimpleGame\SimpleGameCliCore.csproj", "{9CDA0A1B-7206-4D30-8B44-B507CF072F4E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleGameXNA", "SimpleGameXNA\SimpleGameXNA\SimpleGameXNA.csproj", "{23931428-C2AB-4A90-BCFB-31379659468E}"

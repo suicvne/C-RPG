@@ -76,7 +76,7 @@ namespace SimpleGameCliCore
             _inventory.RemoveAt(item);
         }
 		//
-        public void WriteToFile(string destination)
+        public void WriteToFile_OldFormat(string destination)
         {
             using(var sw = new System.IO.StreamWriter(destination))
             {
@@ -95,7 +95,7 @@ namespace SimpleGameCliCore
         /// This reads strictly inventory; no chest
         /// </summary>
         /// <param name="file"></param>
-        public void ReadFromFile_NEWPROTOTYPE(string file)
+        public void ReadFromFile(string file)
         {
             _inventory.Clear();
             int MAXCAPACITY = _inventory.Capacity;
@@ -134,7 +134,9 @@ namespace SimpleGameCliCore
                                 _inventory.Add(toAdd);
                             }
                             catch
-                            { Room err = new Room(RoomType.ErrorMessage, "", "", ""); /*files screwed*/ }
+                            { Room err = new Room(RoomType.ErrorMessage, "An error occurred while parsing your inventory", 
+                                "FormatException in ReadFromFile_NEWPROTOTYPE", 
+                                "Stop screwing around with your saves!"); /*files screwed*/ }
                         }
                         else
                         {
@@ -152,7 +154,11 @@ namespace SimpleGameCliCore
                                 _inventory.Add(toAdd);
                             }
                             catch
-                            { Room err = new Room(RoomType.ErrorMessage, "", "", ""); /*files screwed*/ }
+                            {
+                                Room err = new Room(RoomType.ErrorMessage, "An error occurred while parsing your inventory",
+                                  "FormatException in ReadFromFile_NEWPROTOTYPE",
+                                  "Stop screwing around with your saves!"); /*files screwed*/
+                            }
                         }
                     }
                     lineCountIndex++;
@@ -176,7 +182,7 @@ namespace SimpleGameCliCore
             return false;
         }
 
-        public void WriteToFile_NEWPROTOTYPE(string file)
+        public void WriteToFile(string file)
         {
             using(var sw = new System.IO.StreamWriter(file))
             {
@@ -231,7 +237,11 @@ namespace SimpleGameCliCore
             //
         }
 
-        public void ReadFromFile(string file)
+        /// <summary>
+        /// This void is used for the second incarnation of the format, before the chest and inv sections were added.
+        /// </summary>
+        /// <param name="file"></param>
+        public void ReadFromFile_OldFormat(string file)
         {
             _inventory.Clear();
             int MAXCAPACITY = _inventory.Capacity;

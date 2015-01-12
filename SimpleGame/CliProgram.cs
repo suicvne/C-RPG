@@ -30,7 +30,7 @@ namespace SimpleGameCliCore
                 {
                     Player createdChar = CharCreation.CreateCharacter();
                     createdChar.WriteToFile(GamesSaveDirectory + dirSepChar + createdChar.Name + dirSepChar + "player.sav");
-                    MainPlayerInventory.WriteToFile_NEWPROTOTYPE(GamesSaveDirectory + dirSepChar + createdChar.Name + dirSepChar + "player.inv");
+                    MainPlayerInventory.WriteToFile(GamesSaveDirectory + dirSepChar + createdChar.Name + dirSepChar + "player.inv");
                     goto VERYBEGINNING;
                 }
                 else
@@ -40,11 +40,11 @@ namespace SimpleGameCliCore
                         //begin migration
                         Console.WriteLine("Beginning save migration");
                         Console.ReadLine();
-                        MainPlayerInventory.ReadFromFile(loadedChar + dirSepChar + "player.inv");
+                        MainPlayerInventory.ReadFromFile_OldFormat(loadedChar + dirSepChar + "player.inv");
                         System.IO.File.Move(loadedChar + dirSepChar + "player.inv", loadedChar + dirSepChar + "player.inv_old");
-                        MainPlayerInventory.WriteToFile_NEWPROTOTYPE(loadedChar + dirSepChar + "player.inv");
+                        MainPlayerInventory.WriteToFile(loadedChar + dirSepChar + "player.inv");
                     }
-                    MainPlayerInventory.ReadFromFile_NEWPROTOTYPE(loadedChar + dirSepChar + "player.inv");
+                    MainPlayerInventory.ReadFromFile(loadedChar + dirSepChar + "player.inv");
                     MainPlayer.ReadFromFile(loadedChar + dirSepChar + "player.sav");
                     MainChestHandler.TryLoadingAllChests();
                 }
@@ -58,7 +58,7 @@ namespace SimpleGameCliCore
                 {
                     Player createdChar = CharCreation.CreateCharacter();
                     createdChar.WriteToFile(GamesSaveDirectory + dirSepChar + createdChar.Name + dirSepChar + "player.sav");
-                    MainPlayerInventory.WriteToFile_NEWPROTOTYPE(GamesSaveDirectory + dirSepChar + createdChar.Name + dirSepChar + "player.inv");
+                    MainPlayerInventory.WriteToFile(GamesSaveDirectory + dirSepChar + createdChar.Name + dirSepChar + "player.inv");
                     goto VERYBEGINNING;
                 }
                 else
@@ -73,11 +73,6 @@ namespace SimpleGameCliCore
                 GetCommandInput();
             }
 		}
-
-        public static void blah()
-        {
-
-        }
 
         public static void GetCommandInput()
         {
@@ -123,7 +118,7 @@ namespace SimpleGameCliCore
         {
             //Save everything
             MainPlayer.WriteToFile(GamesSaveDirectory + dirSepChar + MainPlayer.Name + dirSepChar + "player.sav");
-            MainPlayerInventory.WriteToFile_NEWPROTOTYPE(GamesSaveDirectory + dirSepChar + MainPlayer.Name + dirSepChar + "player.inv");
+            MainPlayerInventory.WriteToFile(GamesSaveDirectory + dirSepChar + MainPlayer.Name + dirSepChar + "player.inv");
         }
 
 		static void FirstRunEvents()
@@ -143,10 +138,9 @@ namespace SimpleGameCliCore
 				                  "Try running the program as administrator to allow access to the Documents directory"
 				                 );
 				Environment.Exit(-6);
-			}
-			
-			//
-			
+			}	
 		}
+
+        //
 	}
 }
