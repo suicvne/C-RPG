@@ -13,7 +13,7 @@ namespace SimpleGameCliCore.Items
             ID = 123456789;
             Name = "Massive Dong";
             PluralName = "There can only be one";
-            Description = "Nicole's favourite, and what Mike doesn't have";
+            Description = "What Mike doesn't have";
             ItemType = Items.ItemType.Weapon;
             Type = WeaponType.Melee;
             Damage = 100;
